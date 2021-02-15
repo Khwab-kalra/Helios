@@ -1,40 +1,99 @@
-% for calculation of inductace of in single transmission wire per unit length
+% for calculation of inductace of in transmission line per unit length
 
-r = 0.005 % radius of cross-section area of conductor (m^2)
-GMR = 0.7788*r % geometric mean radius
-meu = 4*pi*10^(-7) % magnetic permebility in non-magnetic material
+% radius of cross-section area of conductor (m^2)
+r = input('enter the radius of conductor (m^2) ');
 
-% distance array
-d = 0:0.1:1
+GMR = % for calculation of inductace of in transmission line per unit length
 
-% inductance value array at per distance
-l = (meu/(2*pi))*log(d/GMR)
+% radius of cross-section area of conductor (m^2)
+r = input('enter the radius of conductor (m^2) ');
+
+GMR = 0.7788*r; % geometric mean radius
+meu = 4*pi*10^(-7); % magnetic permebility in non-magnetic material
+
+% distance from the conductor
+d = 0:0.1:1;
+
+% conditions
+disp('###############################')
+disp('Choose the option')
+disp('1. For single conductor')
+disp('2. For three phase transmission line ')
+
+opt1 = input('Enter your option ');
+
+if opt1 == 1
+    l = (meu/(2*pi))*log(d/GMR);
+    plotgraph(d,l)
+elseif opt1 == 2
+    disp('Choose the option')
+    disp('1. For symmetrical arrangement')
+    disp('2. For Transposed arrangment')
+    opt2 = input('Enter your option ');
+    if opt2 == 2
+        Dab = input('Enter the distance between conductor A and conductor B');
+        Dbc = input('Enter the distance between conductor B and conductor C');
+        Dca = input('Enter the distance between conductor C and conductor A');
+        GMD = (Dab+Dbc+Dca)^(1/3);
+        l = (meu/(2*pi))*log(GMD/GMR);
+        disp(l)
+    else
+        D = input('Enter the distance between conductors');
+        l = (meu/(2*pi))*log(D/GMR);
+        disp(l)
+    end
+end
 
 % for ploting the graph
-figure
-plot(d,l)
-title('Inductance of single transmission line')
-xlable('distance form the wire')
-ylable('inductance value in Henry/meter')
+function msg = plotgraph(x,y)
+    figure
+    plot(x,y)
+    title('Inductance of single transmission line')
+    xlabel('distance form the wire (m)')
+    ylabel('inductance value (H/m)')
+    msg = 'ploting graph';
+end0.7788*r; % geometric mean radius
+meu = 4*pi*10^(-7); % magnetic permebility in non-magnetic material
 
-% Inductance of Three-Phase Transmission Line in Asymmetrical Arrangement per unit length
+% distance from the conductor
+d = 0:0.1:1;
 
-% case 1. when all conductor are symmerical, means
-% Ia + Ib + Ic = 0
-% D = Dac = Dab = Dbc
+% conditions
+disp('###############################')
+disp('Choose the option')
+disp('1. For single conductor')
+disp('2. For three phase transmission line ')
 
-D = 0.5 % (m^2)
+opt1 = input('Enter your option ');
 
-% then inductance of three pahse transmission line per phase per unit length
-l = (meu/(2*pi))*log(D/GMR)
+if opt1 == 1
+    l = (meu/(2*pi))*log(d/GMR);
+    plotgraph(d,l)
+elseif opt1 == 2
+    disp('Choose the option')
+    disp('1. For symmetrical arrangement')
+    disp('2. For Transposed arrangment')
+    opt2 = input('Enter your option ');
+    if opt2 == 2
+        Dab = input('Enter the distance between conductor A and conductor B');
+        Dbc = input('Enter the distance between conductor B and conductor C');
+        Dca = input('Enter the distance between conductor C and conductor A');
+        GMD = (Dab+Dbc+Dca)^(1/3);
+        l = (meu/(2*pi))*log(GMD/GMR);
+        disp(l)
+    else
+        D = input('Enter the distance between conductors');
+        l = (meu/(2*pi))*log(D/GMR);
+        disp(l)
+    end
+end
 
-% case 2. for transposed three phase transmission line
-
-Dab = 0.6
-Dbc = 0.4
-Dac = 0.5
-
-GMD = (Dab+Dbc+Dac)^(1/3) % geomertic mean distances
-
-% then inductance of three pahse transmission line per phase per unit length
-l = (meu/(2*pi))*log(GMD/GMR)
+% for ploting the graph
+function msg = plotgraph(x,y)
+    figure
+    plot(x,y)
+    title('Inductance of single transmission line')
+    xlabel('distance form the wire (m)')
+    ylabel('inductance value (H/m)')
+    msg = 'ploting graph';
+end
